@@ -1,0 +1,50 @@
+type Transaction {
+    id: ID!
+    accountId: ID!
+    amount: Float!
+    currency: String!
+    merchantCategory: String!
+    country: String!
+    createdAt: String
+}
+
+type TransferResult {
+    transferId: ID!
+    sourceAccountId: ID!
+    targetAccountId: ID!
+    amount: Float!
+    currency: String!
+    status: String!
+    debitTransactionId: ID
+    creditTransactionId: ID
+    executedAt: String
+    message: String
+}
+
+input TransactionInput {
+    accountId: ID!
+    amount: Float!
+    currency: String!
+    merchantCategory: String!
+    country: String!
+}
+
+input TransferInput {
+    sourceAccountId: ID!
+    targetAccountId: ID!
+    amount: Float!
+    currency: String!
+    description: String
+}
+
+type Query {
+    getTransactionById(id: ID!): Transaction
+    allTransactions: [Transaction!]!
+    getTransactionsByAccount(accountId: ID!): [Transaction!]!
+}
+
+type Mutation {
+    createTransaction(input: TransactionInput!): Transaction
+    transferFunds(input: TransferInput!): TransferResult
+}
+
