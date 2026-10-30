@@ -1,0 +1,28 @@
+type Account {
+    id: ID!
+    customerReference: String!
+    status: String!
+    currency: String!
+    balance: Float!
+    createdAt: String
+}
+
+input AccountInput {
+    customerReference: String!
+    status: String
+    currency: String!
+    balance: Float
+}
+
+type Query {
+    getAccountById(id: ID!): Account
+    allAccounts: [Account!]!
+    isAccountActive(id: ID!): Boolean!
+}
+
+type Mutation {
+    createAccount(input: AccountInput!): Account
+    updateAccountBalance(id: ID!, amount: Float!, operationType: String!): Account
+    updateAccountStatus(id: ID!, status: String!): Account
+}
+
